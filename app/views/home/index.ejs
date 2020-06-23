@@ -1,0 +1,142 @@
+<!DOCTYPE HTML>
+<html lang="pt-br">
+
+<head>
+	<meta charset="UTF-8">
+
+	<title>Portal de notícias</title>
+
+	<!-- JQuery -->
+	<script src="js/jquery-2.2.1.js"></script>
+
+	<!-- bootstrap - link cdn -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+		integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+	<!-- incluindo css -->
+	<link href="css/style.css" rel="stylesheet">
+
+	<!-- favicon -->
+	<link rel="shortcut icon" href="images/favicon.ico" />
+</head>
+
+<body>
+
+	<nav class="navbar navbar-default navbar-static-top">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+					aria-expanded="false" aria-controls="navbar">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+
+				<img src="images/logo.png" />
+			</div>
+
+			<div id="navbar" class="navbar-collapse collapse">
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="index.html">HOME</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+
+
+
+
+
+
+	<div class="container">
+
+		<% if(validacao.length > 0){ %>
+		<div class="alert alert-danger">
+			<strong>Atenção!</strong>
+			<ul>
+				<% for(var i = 0; i < validacao.length; i++) {%>
+				<li><%=validacao[i].msg%></li>
+				<% } %>
+			</ul>
+		</div>
+		<% } %>
+
+		<div class="row">
+
+			<div class="col-md-12 text-align-center">
+				<form class="form-inline form-entrar" action="/autenticar" method="post">
+					<div class="form-group">
+						<input type="text" name="usuario" id="usuario" placeholder="Usuário" class="form-control"
+							autocomplete="off" />
+						<input type="password" name="senha" id="senha" placeholder="Senha" class="form-control" />
+						<button type="submit" class="btn btn-success">Entrar</button>
+						<button type="button" class="btn btn-info">Cadastro</button>
+					</div>
+				</form>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-8">
+				<div class="noticia_wrapper">
+					<span class="noticia_autor">Por: <%= noticias[0].owner %></span>
+					<a href="noticia?id=<%= noticias[0].id %>" class="noticia_titulo"><%= noticias[0].title %></a>
+					<span class="noticia_data"><%= noticias[0].date %></span>
+					<br />
+					<p class="noticia_resumo">
+						<%= noticias[0].resume %>
+					</p>
+				</div>
+			</div>
+
+			<div class="col-md-4">
+				<div class="noticia_wrapper">
+					<span class="noticia_autor">Por: <%= noticias[1].owner %></span>
+					<a href="noticia?id=<%= noticias[1].id %>" class="noticia_titulo"><%= noticias[1].title %></a>
+					<span class="noticia_data"><%= noticias[1].date %></span>
+
+					<br />
+					<p class="noticia_resumo">
+						<%= noticias[1].resume %>
+					</p>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+
+			<% for(var i = 2; i < noticias.length; i++) { %>
+
+			<div class="col-md-4">
+				<div class="noticia_wrapper">
+					<span class="noticia_autor">Por: <%= noticias[i].owner %></span>
+					<a href="noticia?id=<%= noticias[i].id %>" class="noticia_titulo"><%= noticias[i].title %></a>
+					<span class="noticia_data"><%= noticias[i].date %></span>
+
+					<br />
+					<p class="noticia_resumo">
+						<%= noticias[i].resume %>
+					</p>
+				</div>
+			</div>
+
+			<% } %>
+
+
+
+		</div>
+
+		<div class="row ver_mais">
+			<button type="button" class="btn btn-default"><a href="noticias">Ver todas as notícias</a></button>
+		</div>
+
+	</div>
+
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
+		integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
+		crossorigin="anonymous"></script>
+
+</body>
+
+</html>

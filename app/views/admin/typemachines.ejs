@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="CoreInd - A Indústria 4.0">
+    <meta name="author" content="Luis Hlatki">
+
+    <title><%= siteName %></title>
+
+    <!-- Custom fonts for this template -->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/sb-admin-2.css" rel="stylesheet">
+
+    <!-- Custom styles for this page -->
+    <link href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/rowreorder/1.2.6/css/rowReorder.dataTables.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css" rel="stylesheet">
+    <link rel="shortcut icon" href="/img/favicon.png" type="image/x-icon" />
+
+
+
+</head>
+
+<body id="page-top">
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <%- include ../partials/navigation.ejs %>
+
+
+        <!-- End of Sidebar -->
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <%- include ../partials/user_interface.ejs %>
+
+                <!-- End of Topbar -->
+
+                <!-- Begin Page Content -->
+
+                <style>
+                    .form-profile {
+                        text-align: center;
+                    }
+
+                    .form-profile img {
+                        border-radius: 150px;
+                        margin: 25px;
+                        text-align: center;
+                    }
+
+                    #dataTable tbody tr td:last-child {
+                        text-align: center;
+                    }
+
+                    #dataTable tbody tr td:last-child a {
+                        margin-left: 2px;
+                    }
+                </style>
+                <div class="container-fluid">
+
+                    <!-- Page Heading -->
+                    <h1 class="h3 mb-2 text-gray-800">Tipos de Equipamento</h1>
+
+                    <% if(validacao.length > 0) {%>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="alert alert-danger">
+                                <strong>Atenção!</strong>
+                                <ul>
+                                    <% for(var i = 0; i < validacao.length; i++) { %>
+                                    <li><%= validacao[i].msg %></li>
+                                    <% } %>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <% } %>
+
+
+                    <!-- DataTales Example -->
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <a href="#" data-toggle="modal" data-target="#addItem"
+                                class="btn btn-primary btn-icon-split">
+                                <span class="icon text-white-50">
+                                    <i class="fas fa-plus"></i>
+                                </span>
+                                <span class="text">Adicionar Novo Tipo Equipamento</span>
+                            </a>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+
+                                        <tr>
+                                            <th>Título</th>
+                                            <th>Tipo de Equipamento</th>
+                                            <th>Ações</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                    </tbody>
+                                </table>
+
+                            </div>
+
+
+                        </div>
+
+                    </div>
+                    <!-- End of Main Content -->
+
+                    <!-- Delete Modal HTML -->
+                    <form action="/typemachine-delete" method="post">
+                        <div class="modal fade" id="deleteItem" tabindex="-1" role="dialog"
+                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Remover Equipamento</h5>
+                                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">×</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+
+                                        Deseja realmente remover o equipamento: <span id="titleTypeMachine"></span> ?
+
+
+                                    </div>
+                                    <div class="modal-footer">
+                                        <input type="hidden" name="idTypeMachine" class="idTypeMachine">
+                                        <button class="btn btn-secondary" type="button"
+                                            data-dismiss="modal">Cancelar</button>
+
+                                        <button class="btn btn-primary" type="submit">Enviar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                    <form action="/typemachine-insert" method="post">
+                        <div class="modal fade" id="addItem" tabindex="-1" role="dialog"
+                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Adicionar Tipo de Equipamento
+                                        </h5>
+                                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">×</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+
+                                        <div class="form-group col-md-12">
+                                            <label for="titleTypeMachine">Título</label>
+                                            <input type="text" class="form-control titleTypeMachine"
+                                                id="titleTypeMachine" name="titleTypeMachine"
+                                                aria-describedby="titleTypeMachine">
+                                        </div>
+                                        <div class="form-group col-md-12">
+                                            <label for="descriptionTypeMachine">Descrição</label>
+                                            <textarea class="form-control descriptionTypeMachine"
+                                                id="descriptionTypeMachine" name="descriptionTypeMachine"
+                                                rows="3"></textarea>
+                                        </div>
+
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button class="btn btn-secondary" type="button"
+                                            data-dismiss="modal">Cancelar</button>
+                                        <button class="btn btn-primary" type="submit">Enviar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                    <form action="/typemachine-update" method="post">
+                        <div class="modal fade" id="editItem" tabindex="-1" role="dialog"
+                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Editar Tipo de Equipamento</h5>
+                                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">×</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+
+                                        <div class="form-group col-md-12">
+                                            <label for="titleTypeMachine">Título</label>
+                                            <input type="text" class="form-control titleTypeMachine"
+                                                id="titleTypeMachine" name="titleTypeMachine"
+                                                aria-describedby="titleTypeMachine">
+                                        </div>
+                                        <div class="form-group col-md-12">
+                                            <label for="descriptionTypeMachine">Descrição</label>
+                                            <textarea class="form-control descriptionTypeMachine"
+                                                id="descriptionTypeMachine" name="descriptionTypeMachine"
+                                                rows="3"></textarea>
+                                        </div>
+
+
+                                    </div>
+                                    <div class="modal-footer">
+                                        <input type="hidden" name="idTypeMachine" class="idTypeMachine">
+                                        <button class="btn btn-secondary" type="button"
+                                            data-dismiss="modal">Cancelar</button>
+                                        <button class="btn btn-primary" type="submit">Enviar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                    <div class="modal fade" id="viewItem" tabindex="-1" role="dialog"
+                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Tipo de Equipamento</h5>
+                                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+
+
+                                    <div class="form-group col-md-12">
+                                        <label for="titleTypeMachine">Título</label>
+                                        <input type="text" class="form-control titleTypeMachine" id="titleTypeMachine"
+                                            name="titleTypeMachine" aria-describedby="titleTypeMachine" disabled>
+                                    </div>
+                                    <div class="form-group col-md-12">
+                                        <label for="descriptionTypeMachine">Descrição</label>
+                                        <textarea class="form-control descriptionTypeMachine"
+                                            id="descriptionTypeMachine" name="descriptionTypeMachine" rows="3"
+                                            disabled></textarea>
+                                    </div>
+
+
+                                </div>
+                                <div class="modal-footer">
+                                    <input type="hidden" name="idTypeMachine" class="idTypeMachine">
+                                    <button class="btn btn-secondary" type="button"
+                                        data-dismiss="modal">Cancelar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+
+
+
+                    <!-- Footer -->
+                    <footer class="sticky-footer bg-white">
+                        <div class="container my-auto">
+                            <div class="copyright text-center my-auto">
+                                <span>Copyright &copy; <%= siteName %></span>
+                            </div>
+                        </div>
+                    </footer>
+                    <!-- End of Footer -->
+
+                </div>
+                <!-- End of Content Wrapper -->
+
+            </div>
+            <!-- End of Page Wrapper -->
+
+            <!-- Scroll to Top Button-->
+            <a class="scroll-to-top rounded" href="#page-top">
+                <i class="fas fa-angle-up"></i>
+            </a>
+
+            <!-- Logout Modal-->
+            <%- include ../partials/footer.ejs %>
+
+
+            <!-- Bootstrap core JavaScript-->
+            <script src="vendor/jquery/jquery.min.js"></script>
+            <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+            <!-- Core plugin JavaScript-->
+            <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+            <!-- Custom scripts for all pages-->
+            <script src="js/sb-admin-2.min.js"></script>
+
+            <!-- Page level plugins -->
+            <script src="vendor/datatables/jquery.dataTables.min.js"></script>
+            <script src="https://cdn.datatables.net/rowreorder/1.2.6/js/dataTables.rowReorder.min.js"></script>
+            <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+        
+            <script src="js/user-info.js"></script>
+
+
+            <!-- Page level custom scripts -->
+            <script>
+
+                // Call the dataTables jQuery plugin
+                $(document).ready(function () {
+                    $('#dataTable').DataTable({
+                        responsive: true,
+                        processing: true,
+                        "ajax": "http://"+ actualURL +"/api-typemachines/",
+                        columns: [
+                            { data: 'titleTypeMachine' },
+                            { data: 'descriptionTypeMachine' },
+                            { data: "actions" }
+
+                        ],
+                        "columnDefs": [
+                            {
+                                "targets": 2, //"Número referente a coluna, startando no 0"
+                                "render": function (data, type, row) {
+
+                                    //Aqui tem um callback onde pode retornar o botão
+                                    //row - aqui você possui todos os atributos da sua linha
+                                    //Basta criar seu botão e como string e retornar;
+
+                                    var deleteBtn = '<a href="#" data-toggle="modal" data-id="' + row.idTypeMachine + '" data-title="' + row.titleTypeMachine + '" data-description="' + row.descriptionTypeMachine + '" class="view btn btn-info btn-circle btn-sm">' +
+                                        '<i class="fas fa-info-circle"></i>' +
+                                        '</a>' +
+                                        '<a href="#" data-toggle="modal" data-id="' + row.idTypeMachine + '" data-title="' + row.titleTypeMachine + '" data-description="' + row.descriptionTypeMachine + '" class="edit btn btn-warning btn-circle btn-sm">' +
+                                        '<i class="fas fa-edit"></i>' +
+                                        '</a>' +
+                                        '<a href="#" data-toggle="modal" data-id="' + row.idTypeMachine + '" data-title="' + row.titleTypeMachine + '" class="delete btn btn-danger btn-circle btn-sm">' +
+                                        '<i class="fas fa-trash"></i>' +
+                                        '</a>';
+
+                                    return deleteBtn;
+                                }
+                            }
+                        ],
+                        "language": {
+                            "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Portuguese-Brasil.json"
+                        }
+                    });
+                });
+
+                //showing delete record modal
+                $('#dataTable').on('click', '.edit', function () {
+                    var id = $(this).data('id');
+                    var title = $(this).data('title');
+                    var description = $(this).data('description');
+                    $('#editItem').modal('show');
+                    $('.idTypeMachine').val(id);
+                    $('.titleTypeMachine').val(title);
+                    $('.descriptionTypeMachine').val(description);
+                });
+
+                $('#dataTable').on('click', '.view', function () {
+                    var id = $(this).data('id');
+                    var title = $(this).data('title');
+                    var description = $(this).data('description');
+                    $('#viewItem').modal('show');
+                    $('.idTypeMachine').val(id);
+                    $('.titleTypeMachine').val(title);
+                    $('.descriptionTypeMachine').val(description);
+                });
+
+                $('#dataTable').on('click', '.delete', function () {
+                    var id = $(this).data('id');
+                    var title = $(this).data('title');
+                    $('#deleteItem').modal('show');
+                    $('.idTypeMachine').val(id);
+                    document.getElementById("titleTypeMachine").innerHTML = title;
+
+                });
+
+
+
+
+
+            </script>
+
+
+
+</body>
+
+</html>

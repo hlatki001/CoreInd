@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="CoreInd - A Indústria 4.0">
+  <meta name="author" content="Luis Hlatki">
+
+  <title><%= siteName %></title>
+
+  <!-- Custom fonts for this template-->
+  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link
+    href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+    rel="stylesheet">
+
+  <!-- Custom styles for this template-->
+  <link href="css/sb-admin-2.css" rel="stylesheet">
+
+  <!-- Custom styles for this page -->
+  <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+  <link href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" rel="stylesheet">
+  <link href="https://cdn.datatables.net/rowreorder/1.2.6/css/rowReorder.dataTables.min.css" rel="stylesheet">
+  <link href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css" rel="stylesheet">
+  <link rel="shortcut icon" href="/img/favicon.png" type="image/x-icon" />
+
+
+
+</head>
+
+<body id="page-top">
+
+
+  <!-- Page Wrapper -->
+  <div id="wrapper">
+
+    <!-- Sidebar -->
+
+    <%- include ../partials/navigation.ejs %>
+
+    <!-- End of Sidebar -->
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+      <!-- Main Content -->
+      <div id="content">
+
+        <style>
+          .form-profile {
+            text-align: center;
+          }
+
+          .form-profile img {
+            border-radius: 150px;
+            margin: 25px;
+            text-align: center;
+          }
+
+          #dataTable tbody tr td:last-child {
+            text-align: center;
+          }
+
+          #dataTable tbody tr td:last-child a {
+            margin-left: 2px;
+          }
+        </style>
+
+        <!-- Topbar -->
+        <%- include ../partials/user_interface.ejs %>
+
+        <!-- End of Topbar -->
+
+        <!-- Begin Page Content -->
+        <div class="container-fluid">
+
+          <!-- Page Heading -->
+          <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">Alertas</h1>
+
+          </div>
+          <!-- Content Row -->
+
+          <!-- DataTales Example -->
+          <div class="card shadow mb-4">
+
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-striped table-bordered" id="dataTable" width="100%" cellspacing="0">
+                  <thead>
+
+                    <tr>
+                      <th>Título</th>
+                      <th>Data</th>
+                      <% if (role <= 1) { %>
+                      <th>Usuário</th>
+
+                      <% } else {%>
+                        <th>Tipo</th>
+
+                      <%  } %>
+                      <th>Ações</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+
+                  </tbody>
+                </table>
+
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <form action="/api-alerts-delete" method="post">
+        <!-- Delete Modal HTML -->
+        <div class="modal fade" id="deleteItem" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+          aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Remover Alerta</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">×</span>
+                </button>
+              </div>
+              <div class="modal-body">
+
+                Deseja realmente remover o equipamento: <span id="titleAlert"></span> ?
+
+
+              </div>
+              <div class="modal-footer">
+                <input type="hidden" name="idAlert" class="idAlert">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+
+                <button class="btn btn-primary" type="submit" id="teste">Enviar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+      <!-- End of Main Content -->
+
+      <!-- Footer -->
+      <footer class="sticky-footer bg-white">
+        <div class="container my-auto">
+          <div class="copyright text-center my-auto">
+            <span>Copyright &copy; <%= siteName %></span>
+          </div>
+        </div>
+      </footer>
+      <!-- End of Footer -->
+
+    </div>
+    <!-- End of Content Wrapper -->
+
+  </div>
+  <!-- End of Page Wrapper -->
+
+  <!-- Scroll to Top Button-->
+  <a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+  </a>
+
+  <!-- Logout Modal-->
+
+
+  <%- include ../partials/footer.ejs %>
+
+
+
+  <!-- Bootstrap core JavaScript-->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Core plugin JavaScript-->
+  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+  <!-- Custom scripts for all pages-->
+  <script src="js/sb-admin-2.min.js"></script>
+
+  <!-- Page level plugins -->
+  <script src="vendor/datatables/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/rowreorder/1.2.6/js/dataTables.rowReorder.min.js"></script>
+  <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+
+
+
+  <script type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script>
+
+  <script src="js/user-info.js"></script>
+
+
+
+
+  <script>
+
+
+    $('#dataTable').on('click', '.view', function () {
+      var sendData = $(this).data('id');
+      var result;
+      $.ajax({
+        url: 'http://' + actualURL + '/api-alerts',    //Your api url
+        type: 'POST',   //type is any HTTP method
+        data: {
+          data: sendData
+        },      //Data as js object
+        success: function (data) {
+          loadAlerts();
+
+          $('#dataTable').DataTable().ajax.reload();
+          return data;
+        },
+        error: function () {
+          alert('Error occured');
+        }
+      });
+    });
+
+  </script>
+  <% if (role <= 1) { %>
+
+  <script>
+    var loadAlertsAll = function () {
+      $(document).ready(function () {
+        $('#dataTable').DataTable({
+          responsive: true,
+          ajax: {
+            url: 'http://' + actualURL + '/api-alerts/',
+            dataSrc: 'results'
+          },
+          order: [[1, "desc"]],
+          columns: [
+            {
+              data: 'titleAlert',
+              "render": function (data, type, row) {
+                if (row.statusAlert == 0) {
+                  return '<div class="font-weight-bold">' + row.titleAlert + '</div>';
+                }
+                else {
+                  return '<div>' + row.titleAlert + '</div>';
+                }
+              }
+            },
+            {
+              data: 'dateAlert',
+
+              "render": function (data, type, row) {
+                if (row.statusAlert == 0) {
+                  return '<div class="font-weight-bold">' + row.dateAlert + '</div>';
+                }
+                else {
+                  return '<div>' + row.dateAlert + '</div>';
+                }
+              }
+            },
+            {
+              data: 'name',
+              "render": function (data, type, row) {
+
+                return row.name;
+              }
+
+            },
+            { data: "actions" }
+          ],
+          "columnDefs": [
+            {
+
+              "targets": 3, //"Número referente a coluna, startando no 0"
+              "render": function (data, type, row) {
+
+                if (row.statusAlert == 0) {
+                  var textW = "font-weight-bold";
+                }
+                else {
+                  var textW = "";
+                }
+                if (row.typeAlert == "Aviso") {
+
+                  var iconBG = "bg-primary";
+                  var iconICO = "fas fa-file-alt";
+                }
+                else if (row.typeAlert == "Alerta") {
+                  var iconBG = "bg-warning";
+                  var iconICO = "fas fa-exclamation-triangle";
+                }
+
+                if (row.statusAlert == 1) {
+
+                }
+
+                //Aqui tem um callback onde pode retornar o botão
+                //row - aqui você possui todos os atributos da sua linha
+                //Basta criar seu botão e como string e retornar;
+
+                var deleteBtn = '<a href="#"  data-id="' + row.idAlert + '" class="view btn btn-info btn-circle btn-sm">' +
+                  '<i class="fas fa-check"></i>' +
+                  '</a>' +
+                  '<a href="#" data-toggle="modal" data-id="' + row.idAlert + '" data-title="' + row.titleAlert + '" class="delete btn btn-danger btn-circle btn-sm">' +
+                  '<i class="fas fa-trash"></i>' +
+                  '</a>';
+
+                return deleteBtn;
+              }
+            }
+          ],
+          "language": {
+            "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Portuguese-Brasil.json"
+          }
+        });
+      });
+    }
+  </script>
+  <% } else { %>
+  <script>
+    var loadAlertsAll = function () {
+      $(document).ready(function () {
+        $('#dataTable').DataTable({
+          responsive: true,
+          processing: true,
+          ajax: {
+            url: 'http://' + actualURL + '/api-alerts/',
+            dataSrc: 'results'
+          },
+          order: [[1, "desc"]],
+          columns: [
+            {
+              data: 'titleAlert',
+              "render": function (data, type, row) {
+                if (row.statusAlert == 0) {
+                  return '<div class="font-weight-bold">' + row.titleAlert + '</div>';
+                }
+                else {
+                  return '<div>' + row.titleAlert + '</div>';
+                }
+              }
+            },
+            {
+              data: 'dateAlert',
+
+              "render": function (data, type, row) {
+                if (row.statusAlert == 0) {
+                  return '<div class="font-weight-bold">' + row.dateAlert + '</div>';
+                }
+                else {
+                  return '<div>' + row.dateAlert + '</div>';
+                }
+              }
+            },
+            {
+              data: 'typeAlert',
+              "render": function (data, type, row) {
+                if (row.typeAlert == "Aviso") {
+                  return '<div class="icon-circle bg-warning"><i class="fas fa-exclamation-triangle text-white"></i></div>';
+                }
+                else {
+                  return '<div class="icon-circle bg-primary"><i class="fas fa-file-alt text-white"></i></i></div>';
+                }
+              }
+
+
+            },
+            { data: "actions" }
+          ],
+          "columnDefs": [
+            {
+
+              "targets": 3, //"Número referente a coluna, startando no 0"
+              "render": function (data, type, row) {
+
+                if (row.statusAlert == 0) {
+                  var textW = "font-weight-bold";
+                }
+                else {
+                  var textW = "";
+                }
+                if (row.typeAlert == "Aviso") {
+
+                  var iconBG = "bg-primary";
+                  var iconICO = "fas fa-file-alt";
+                }
+                else if (row.typeAlert == "Alerta") {
+                  var iconBG = "bg-warning";
+                  var iconICO = "fas fa-exclamation-triangle";
+                }
+
+                if (row.statusAlert == 1) {
+
+                }
+
+                //Aqui tem um callback onde pode retornar o botão
+                //row - aqui você possui todos os atributos da sua linha
+                //Basta criar seu botão e como string e retornar;
+
+                var deleteBtn = '<a href="#"  data-id="' + row.idAlert + '" class="view btn btn-info btn-circle btn-sm">' +
+                  '<i class="fas fa-check"></i>' +
+                  '</a>' +
+                  '<a href="#" data-toggle="modal" data-id="' + row.idAlert + '" data-title="' + row.titleAlert + '" class="delete btn btn-danger btn-circle btn-sm">' +
+                  '<i class="fas fa-trash"></i>' +
+                  '</a>';
+
+                return deleteBtn;
+              }
+            }
+          ],
+          "language": {
+            "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Portuguese-Brasil.json"
+          }
+        });
+      });
+    }
+  </script>
+
+
+  <% } %>
+  <script>
+
+
+    $('#dataTable').on('click', '.delete', function () {
+      var id = $(this).data('id');
+      var title = $(this).data('title');
+      $('#deleteItem').modal('show');
+      $('.idAlert').val(id);
+      $('.titleAlert').val(title);
+      document.getElementById("titleAlert").innerHTML = title;
+
+    });
+
+    loadAlertsAll();
+
+
+  </script>
+
+
+
+</body>
+
+</html>

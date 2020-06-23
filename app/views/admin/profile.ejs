@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="CoreInd - A Indústria 4.0">
+    <meta name="author" content="Luis Hlatki">
+
+    <title><%= siteName %></title>
+
+    <!-- Custom fonts for this template -->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this page -->
+    <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <link rel="shortcut icon" href="/img/favicon.png" type="image/x-icon" />
+
+</head>
+
+<body id="page-top">
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <%- include ../partials/navigation.ejs %>
+
+
+        <!-- End of Sidebar -->
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <%- include ../partials/user_interface.ejs %>
+
+                <!-- End of Topbar -->
+
+                <!-- Begin Page Content -->
+
+                <style>
+                    .form-profile {
+                        text-align: center;
+                    }
+
+
+                    .img .image {
+                        opacity: 1;
+                        border-radius: 150px;
+                        margin: 25px;
+                        width: 150px;
+                        height: auto;
+                        transition: .5s ease;
+                        backface-visibility: hidden;
+                    }
+
+                    .img .middle {
+                        transition: .5s ease;
+                        opacity: 0;
+                        position: absolute;
+                        top: 15%;
+                        left: 50%;
+                        transform: translate(-50%, -50%);
+                        -ms-transform: translate(-50%, -50%);
+                        text-align: center;
+                    }
+
+                    .img:hover .image {
+                        opacity: 0.3;
+                    }
+
+                    .img:hover .middle {
+                        opacity: 1;
+                    }
+
+                    .img .text {
+                        color: grey;
+                        font-size: 11px;
+                        padding: 16px 32px;
+                    }
+
+                    #changeImg img {
+                        width: 306px;
+                        border-radius: 600px;
+                    }
+
+                    #changeImg .modal-dialog {
+                        max-width: 600px;
+                    }
+                </style>
+                <div class="container-fluid">
+
+
+                    <div class="col-md-4 offset-md-4 form-profile">
+                        <div class="img">
+                            <img id="img-profile" src="" alt="image" class="image">
+
+                            <div class="middle">
+                                <div class="text" data-toggle="modal" data-target="#changeImg">Clique para mudar</div>
+                            </div>
+
+
+                        </div>
+
+                        <!-- Modal -->
+                        <form method="post" action="user-info-img" enctype="multipart/form-data" id="imgProfile">
+                            <div class="modal fade" id="changeImg" tabindex="-1" role="dialog"
+                                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Trocar foto do Perfil</h5>
+                                            <button type="button" class="close" data-dismiss="modal"
+                                                aria-label="Fechar">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <img id="img-profile-modal" src="" alt="image" class="imageModal">
+
+                                            <div class="custom-file mt-3">
+                                                <input type="file" class="custom-file-input" id="imgprofile"
+                                                    name="imgprofile">
+                                                <label class="custom-file-label" for="imgprofile">Escolher nova
+                                                    imagem</label>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <input type="hidden" name="idUser" class="idUser" value="<%= userID %>">
+                                            <input type="hidden" name="actualPath" class="actualPath" value="<%= imgPath %>">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-dismiss="modal">Fechar</button>
+                                            <button type="submit" class="btn btn-primary" id="imgUpload">Salvar
+                                                mudanças</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        <% if(validacao.length > 0) {%>
+
+                        <div class="row">
+                            <div class="col-md-6 offset-md-3">
+                                <div class="alert alert-danger">
+                                    <strong>Atenção!</strong>
+                                    <ul style="padding: 0px;">
+                                        <% for(var i = 0; i < validacao.length; i++) { %>
+                                        <li style="list-style: none !important;"><%= validacao[i].msg %></li>
+                                        <% } %>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <% } %>
+
+
+                        <form action="user-update" method="post">
+                            <div class="form-group">
+                                <label for="user">Seu usuário</label>
+                                <input type="text" class="form-control" id="user" name="user" disabled>
+
+                            </div>
+
+                            <div class="form-group">
+                                <label for="name">Seu Nome</label>
+                                <input type="text" class="form-control" id="name" name="name" disabled>
+
+                            </div>
+
+                            <div class="form-group">
+                                <label for="password">Sua senha</label>
+                                <input type="password" class="form-control" id="password" name="password"
+                                    placeholder="**********" disabled>
+
+                            </div>
+
+                            <div class="form-group">
+                                <label for="email">Seu email</label>
+                                <input type="email" class="form-control" id="email" name="email" disabled>
+
+                            </div>
+
+                            <div class="form-group">
+                                <label for="phone">Seu telefone</label>
+                                <input type="phone" class="form-control" id="phone" name="phone" disabled>
+
+                            </div>
+
+                            <div class="form-group">
+                                <input type="button" class="btn btn-primary" id="enableBtn" value="Editar Perfil">
+                                <input type="submit" class="btn btn-primary" id="save" value="Salvar" disabled>
+                                <!---728x90--->
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+            <!-- End of Main Content -->
+
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Copyright &copy; <%= siteName %></span>
+                    </div>
+                </div>
+            </footer>
+            <!-- End of Footer -->
+
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Logout Modal-->
+    <%- include ../partials/footer.ejs %>
+
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="js/sb-admin-2.min.js"></script>
+
+    <!-- Page level plugins -->
+    <script src="vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="js/demo/datatables-demo.js"></script>
+    <script src="js/user-info.js"></script>
+
+
+    
+
+    <script>
+
+        $("#but_upload").click(function () {
+            carrega_user();
+        });
+
+        $("#enableBtn").click(function () {
+            $("#name").attr('disabled', !$("#name").attr('disabled'));
+            $("#email").attr('disabled', !$("#email").attr('disabled'));
+            $("#password").attr('disabled', !$("#password").attr('disabled'));
+            $("#phone").attr('disabled', !$("#phone").attr('disabled'));
+            $("#save").attr('disabled', !$("#save").attr('disabled'));
+        });
+
+</script>
+
+</body>
+
+</html>

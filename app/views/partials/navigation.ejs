@@ -1,0 +1,187 @@
+<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+    <!-- Sidebar - Brand -->
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="dashboard">
+        <div class="sidebar-brand-icon rotate-n-15">
+            <img src="img/logo-icone.png" />
+        </div>
+        <div class="sidebar-brand-text mx-2">
+            <img src="img/logo-texto.png" />
+        </div>
+    </a>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider my-0">
+
+    <!-- Nav Item - Dashboard -->
+    <li class="nav-item active">
+        <a class="nav-link" href="dashboard">
+            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <span>Dashboard</span></a>
+    </li>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider">
+
+    <!-- Heading -->
+    <div class="sidebar-heading">
+        Interface
+    </div>
+    <% if (role <= 1) { %>
+    <!-- Nav Item - Pages Collapse Menu -->
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSS" aria-expanded="true"
+            aria-controls="collapseSS">
+            <i class="fas fa-file-medical-alt"></i>
+            <span>Solicitações de Serviço</span>
+        </a>
+        <div id="collapseSS" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="solicitations">Visão Geral</a>
+            </div>
+        </div>
+    </li>
+    <% } %>
+
+
+
+    <!-- Nav Item - Pages Collapse Menu -->
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOS" aria-expanded="true"
+            aria-controls="collapseOS">
+            <i class="fas fa-fw fa-cog"></i>
+            <span>Ordens de Serviço</span>
+        </a>
+        <div id="collapseOS" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="os-geral">Visão Geral</a>
+                <% if (role <= 1) { %>
+
+                <a class="collapse-item" href="type-general">Tipos de OS</a>
+                <a class="collapse-item" href="criticality">Criticidade</a>
+
+                <% } %>
+
+            </div>
+        </div>
+    </li>
+
+    <!-- Nav Item - Utilities Collapse Menu -->
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseMachines"
+            aria-expanded="true" aria-controls="collapseMachines">
+            <i class="fas fa-fw fa-industry"></i>
+            <span>Maquinarios</span>
+        </a>
+        <div id="collapseMachines" class="collapse" aria-labelledby="collapseMachines" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="machines">Visão Geral</a>
+                <% if (role <= 1) { %>
+
+                <a class="collapse-item" href="typemachines">Tipos de Máquinas</a>
+                <% } %>
+
+                <a class="collapse-item" href="manuals">Manuais</a>
+            </div>
+        </div>
+    </li>
+
+
+    <% if (role <= 1) { %>
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseMaintenance"
+            aria-expanded="true" aria-controls="collapseMaintenance">
+            <i class="fas fa-fw fa-wrench"></i>
+            <span>Manutenções</span>
+        </a>
+        <div id="collapseMaintenance" class="collapse" aria-labelledby="headingUtilities"
+            data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="calendar">Visão Geral</a>
+            </div>
+        </div>
+    </li>
+
+
+
+
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLocations"
+            aria-expanded="true" aria-controls="collapseLocations">
+            <i class="fab fa-fw fa-leanpub"></i>
+            <span>Locais</span>
+        </a>
+        <div id="collapseLocations" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="locations-geral">Visão Geral</a>
+            </div>
+        </div>
+    </li>
+
+    <% } %>
+
+    <% if (role <= 1) { %>
+
+
+
+        <!-- Divider -->
+        <hr class="sidebar-divider">
+    
+        <!-- Heading -->
+        <div class="sidebar-heading">
+            Relatórios
+        </div>
+    
+        <!-- Nav Item - Pages Collapse Menu -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseReports" aria-expanded="true"
+                aria-controls="collapseReports">
+                <i class="fas fa-fw fa-folder"></i>
+                <span>Relatórios</span>
+            </a>
+            <div id="collapseReports" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <a class="collapse-item" href="reports">Ordens de Serviço</a>
+                </div>
+            </div>
+        </li>
+    
+        <% } %>
+    
+
+
+    <% if (role <= 1) { %>
+
+
+
+    <!-- Divider -->
+    <hr class="sidebar-divider">
+
+    <!-- Heading -->
+    <div class="sidebar-heading">
+        Configurações
+    </div>
+
+    <!-- Nav Item - Pages Collapse Menu -->
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseAccess" aria-expanded="true"
+            aria-controls="collapseAccess">
+            <i class="fas fa-fw fa-folder"></i>
+            <span>Acessos</span>
+        </a>
+        <div id="collapseAccess" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="user-rights">Visão Geral</a>
+            </div>
+        </div>
+    </li>
+
+    <% } %>
+
+
+    <!-- Sidebar Toggler (Sidebar) -->
+    <div class="text-center d-none d-md-inline">
+        <button class="rounded-circle border-0" id="sidebarToggle"></button>
+    </div>
+
+</ul>
