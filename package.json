@@ -2,12 +2,10 @@
   "name": "coreind",
   "version": "1.0.0",
   "description": "CoreInd - Indústria 4.0",
-  "main": "noticias.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node app.js"
   },
-  "author": "Jorge",
+  "author": "Luis Hlatki",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.15.2",
