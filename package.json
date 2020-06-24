@@ -9,6 +9,9 @@
     "type": "git",
     "url": "git://github.com/hlatki001/CoreInd.git"
   },
+  "engines": {
+    "node": "12.18.1"
+  },
   "author": "Luis Hlatki",
   "license": "ISC",
   "dependencies": {
