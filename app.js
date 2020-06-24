@@ -1,4 +1,4 @@
-var app = require('./config/server');
+var app = require('./app/config/server');
 
 
 
