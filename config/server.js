@@ -23,7 +23,9 @@ app.use(expressSession({
 
 
 
-consign()
+consign({
+	cwd: process.cwd(),
+	})
 	.include('app/routes')
 	.then('config/dbConnection.js')
 	.then('app/models')
