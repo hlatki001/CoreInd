@@ -27,9 +27,9 @@ consign({
 	cwd: process.cwd(),
 	})
 	.include('app/routes')
-	.then('config/dbConnection.js')
 	.then('app/models')
 	.then('app/controllers')
+	.then('config/dbConnection.js')
 	.into(app);
 
 module.exports = app;
