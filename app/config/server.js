@@ -24,10 +24,10 @@ app.use(expressSession({
 
 
 consign()
-	.include('routes')
-	.then('config/dbConnection.js')
-	.then('models')
-	.then('controllers')
+	.include('/routes')
+	.then('/config/dbConnection.js')
+	.then('/models')
+	.then('/controllers')
 	.into(app);
 
 module.exports = app;
