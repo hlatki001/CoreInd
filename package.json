@@ -5,6 +5,10 @@
   "scripts": {
     "start": "node app.js"
   },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/hlatki001/CoreInd.git"
+  },
   "author": "Luis Hlatki",
   "license": "ISC",
   "dependencies": {
