@@ -23,11 +23,11 @@ app.use(expressSession({
 
 
 
-consign({cwd: process.cwd()+"/app"})
-	.include('routes')
+consign()
+	.include('app/routes')
 	.then('config/dbConnection.js')
-	.then('models')
-	.then('controllers')
+	.then('app/models')
+	.then('app/controllers')
 	.into(app);
 
 module.exports = app;
